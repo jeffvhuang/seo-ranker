@@ -2,7 +2,7 @@
 
 namespace SEORanker.domain.Models.ViewModels
 {
-    public class Class1
+    public class SeoRanks
     {
     }
 }

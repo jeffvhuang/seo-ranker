@@ -1,0 +1,8 @@
+2020-02-12 22:15:18.129 +11:00 [ERR] Browserslist: caniuse-lite is outdated. Please run next command `npm update`
+
+2020-02-12 22:17:06.028 +11:00 [ERR] Browserslist: caniuse-lite is outdated. Please run next command `npm update`
+
+2020-02-12 22:18:47.030 +11:00 [ERR] Browserslist: caniuse-lite is outdated. Please run next command `npm update`
+
+2020-02-12 22:31:15.927 +11:00 [ERR] Browserslist: caniuse-lite is outdated. Please run next command `npm update`
+
