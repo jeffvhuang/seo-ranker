@@ -1,7 +1,9 @@
-﻿namespace SEORanker.data.Repositories
+﻿using System.Threading.Tasks;
+
+namespace SEORanker.data.Repositories
 {
     public interface ISearchService
     {
-        string GetSearchContent(string search);
+        Task<string> GetSearchContent(string search);
     }
 }

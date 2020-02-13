@@ -1,5 +1,5 @@
 ﻿using SEORanker.data.Repositories;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SEORanker.domain.Managers
 {
@@ -12,9 +12,10 @@ namespace SEORanker.domain.Managers
             _service = service;
         }
 
-        public List<int> GetRanks(string search, string url)
+        public async Task<string> GetSearchContent(string search)
         {
-
+            var content = await _service.GetSearchContent(search);
+            return content;
         }
     }
 }

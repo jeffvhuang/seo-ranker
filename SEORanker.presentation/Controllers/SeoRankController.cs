@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SEORanker.domain.Managers;
+using SEORanker.presentation.RequestModels;
+using System.Threading.Tasks;
 
 namespace SEORanker.presentation.Controllers
 {
@@ -8,18 +11,21 @@ namespace SEORanker.presentation.Controllers
     [ApiController]
     public class SeoRankController : ControllerBase
     {
-        private readonly ILogger<SeoRankController> _logger;
+        private readonly ISeoRankManager _manager;
 
-        public SeoRankController(ILogger<SeoRankController> logger)
+        public SeoRankController(ISeoRankManager manager)
         {
-            _logger = logger;
+            _manager = manager;
         }
 
-        //[HttpPost("rankseo")]
-        //[ProducesResponseType(typeof(SeoRanksVM), StatusCodes.Status201Created)]
-        //public IActionResult CalculateTrolley(SeoRanksVM trolley)
-        //{
-
-        //}
+        [HttpPost("search")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetSearchContent(SeoRankSearch searchParams)
+        {
+            var content = await _manager.GetSearchContent(searchParams.Search);
+            if (content == null) return NotFound(new ErrorResponse(404, $"Content could not be found."));
+            return Ok(content);
+        }
     }
 }

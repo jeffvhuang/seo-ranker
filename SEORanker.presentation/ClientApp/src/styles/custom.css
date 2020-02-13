@@ -1,0 +1,60 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.main {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.ranks-title {
+    margin-top: 10px;
+}
+
+.row {
+    display: flex;
+    font-size: 1.4em;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+    .row > p {
+        margin: 0 20px;
+    }
+
+.rank {
+    height: 30px;
+    width: 50px;
+    border: .5px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+    .submit-row > p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+.error {
+    color: red;
+}

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SEORanker.data.Repositories
 {
@@ -10,15 +10,29 @@ namespace SEORanker.data.Repositories
     {
         private readonly HttpClient _client;
         private IConfigurationSection _settings;
+        private readonly string _host;
 
         public GoogleSearchService(IConfiguration config, HttpClient client)
         {
+            _client = client;
+            _settings = config.GetSection("Search");
+            _host = _settings["Host"];
 
+            _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            _client.DefaultRequestHeaders.Add("User-Agent", "SeoRanker");
         }
 
-        public string GetSearchContent(string search)
+        public async Task<string> GetSearchContent(string search)
         {
+            var url = $"{_host}/search?q={search}&num=100";
+            var response = await _client.GetAsync(url);
 
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound) return null;
+            else throw new Exception(response.ReasonPhrase);
         }
     }
 }
