@@ -7,6 +7,11 @@ code {
   color: #E01A76;
 }
 
+.main {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -30,4 +35,9 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.submit-row {
+    display: flex;
+    justify-content: flex-end;
 }

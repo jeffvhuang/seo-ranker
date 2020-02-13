@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
+import SubmitButton from './common/SubmitButton';
+import { getRanks } from '../helpers/utils';
 
 export class SearchForm extends Component {
     static displayName = SearchForm.name;
@@ -10,6 +12,7 @@ export class SearchForm extends Component {
         this.state = {
             search: 'online title search',
             url: 'www.infotrack.com.au',
+            loading: false
         }
     }
 
@@ -21,6 +24,10 @@ export class SearchForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.setState({ loading: true }, this.fetchRanks);
+    }
+
+    fetchRanks = () => {
         const { search, url } = this.state;
         const data = { search, url };
 
@@ -32,13 +39,17 @@ export class SearchForm extends Component {
             },
             body: JSON.stringify(data),
         })
-        .then(resp => resp.json())
-        .then(json => {
-            this.props.setRanks(json);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+            .then(resp => resp.json())
+            .then(json => {
+                const ranks = getRanks(json);
+                this.props.setRanks(ranks);
+                })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                this.setState({ loading: false });
+            })
     }
 
   render() {
@@ -64,7 +75,9 @@ export class SearchForm extends Component {
                     value={this.state.url}
                     onChange={this.handleChange} />
             </FormGroup>
-            <Button type="submit">Submit</Button>
+            <div className="submit-row">
+                <SubmitButton isLoading={this.state.loading} />
+            </div>
         </Form>
     );
   }
