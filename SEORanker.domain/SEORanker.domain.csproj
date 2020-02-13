@@ -5,17 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ModelMappers\" />
+    <ProjectReference Include="..\SEORanker.data\SEORanker.data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SEORanker.data\SEORanker.data.csproj" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

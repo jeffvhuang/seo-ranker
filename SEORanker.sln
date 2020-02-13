@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEORanker.presentation", "SEORanker.presentation\SEORanker.presentation.csproj", "{F9AE7D62-73C7-44B2-8886-7470E8F9F267}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEORanker.presentation", "SEORanker.presentation\SEORanker.presentation.csproj", "{F9AE7D62-73C7-44B2-8886-7470E8F9F267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEORanker.domain", "SEORanker.domain\SEORanker.domain.csproj", "{E10E7B93-9BD4-424C-8B27-0A22FCE3E77A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEORanker.domain", "SEORanker.domain\SEORanker.domain.csproj", "{E10E7B93-9BD4-424C-8B27-0A22FCE3E77A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{165717A1-FC1B-443B-BE9A-A69F5F3E264D}"
 EndProject
@@ -13,7 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{ED8562
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{13628D8B-E93B-4B6E-9497-D874AA172906}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEORanker.data", "SEORanker.data\SEORanker.data.csproj", "{197669C2-A7B4-479F-BFB1-8CD666A23321}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEORanker.data", "SEORanker.data\SEORanker.data.csproj", "{197669C2-A7B4-479F-BFB1-8CD666A23321}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3FDF4208-ECC7-4B80-AD6B-7315E9E0AA6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEORanker.presentation.test", "SEORanker.presentation.test\SEORanker.presentation.test.csproj", "{DCA815F8-451B-46C8-B2EC-8D32A8B0FB98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{197669C2-A7B4-479F-BFB1-8CD666A23321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{197669C2-A7B4-479F-BFB1-8CD666A23321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{197669C2-A7B4-479F-BFB1-8CD666A23321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA815F8-451B-46C8-B2EC-8D32A8B0FB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA815F8-451B-46C8-B2EC-8D32A8B0FB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA815F8-451B-46C8-B2EC-8D32A8B0FB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA815F8-451B-46C8-B2EC-8D32A8B0FB98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{F9AE7D62-73C7-44B2-8886-7470E8F9F267} = {165717A1-FC1B-443B-BE9A-A69F5F3E264D}
 		{E10E7B93-9BD4-424C-8B27-0A22FCE3E77A} = {ED8562C0-889D-4703-8B19-4707B46178F3}
 		{197669C2-A7B4-479F-BFB1-8CD666A23321} = {13628D8B-E93B-4B6E-9497-D874AA172906}
+		{DCA815F8-451B-46C8-B2EC-8D32A8B0FB98} = {3FDF4208-ECC7-4B80-AD6B-7315E9E0AA6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D52B0498-9388-4F71-BE5F-54318D1380E1}
