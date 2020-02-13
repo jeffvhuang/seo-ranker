@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { SearchForm } from './SearchForm';
+import { Ranks } from './Ranks';
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -8,67 +9,18 @@ export class Home extends Component {
         super();
 
         this.state = {
-            search: '',
-            url: 'www.infotrack.com.au',
             ranks: []
         }
     }
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
+    setRanks = ranks => this.setState({ ranks });
+
+    render() {
+        return (
+            <div>
+                <SearchForm setRanks={this.setRanks} />
+                <Ranks ranks={this.state.ranks} />
+            </div>
+        );
     }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const { search, url } = this.state;
-        const data = { search, url };
-
-        fetch('https://localhost:44389/api/rank', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-        })
-        .then(resp => resp.json())
-        .then(json => {
-            this.setState({ ranks: json });
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-  render () {
-      return (
-          <div>
-              <Form onSubmit={this.handleSubmit}>
-                  <FormGroup>
-                      <Label for="search">Search</Label>
-                      <Input
-                          id="search"
-                          name="search"
-                          type="text"
-                          placeholder="What do you want to search in Google"
-                          value={this.state.search}
-                          onChange={this.handleChange} />
-                  </FormGroup>
-                  <FormGroup>
-                      <Label for="url">Company Url</Label>
-                      <Input
-                          id="url"
-                          name="url"
-                          type="text"
-                          placeholder="www.infotrack.com.au"
-                          value={this.state.url}
-                          onChange={this.handleChange} />
-                  </FormGroup>
-                  <Button type="submit">Submit</Button>
-              </Form>
-          </div>
-    );
-  }
 }
