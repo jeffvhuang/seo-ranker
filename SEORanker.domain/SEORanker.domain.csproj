@@ -12,8 +12,4 @@
     <ProjectReference Include="..\SEORanker.data\SEORanker.data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
