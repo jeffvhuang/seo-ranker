@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SEORanker.domain.Managers;
 using SEORanker.presentation.RequestModels;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SEORanker.presentation.Controllers
@@ -19,12 +18,12 @@ namespace SEORanker.presentation.Controllers
             _manager = manager;
         }
 
-        [HttpPost("rank")]
-        [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetSeoRanks(SeoRankSearch searchParams)
+        [HttpPost("search")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetSearchContent(SeoRankSearch searchParams)
         {
-            var numbers = await _manager.GetRanks(searchParams.Search, searchParams.Url);
-            return Ok(numbers);
+            var content = await _manager.GetSearchContent(searchParams.Search);
+            return Ok(content);
         }
     }
 }

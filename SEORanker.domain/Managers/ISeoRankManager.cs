@@ -5,6 +5,6 @@ namespace SEORanker.domain.Managers
 {
     public interface ISeoRankManager
     {
-        Task<List<int>> GetRanks(string search, string url);
+        Task<string> GetSearchContent(string search);
     }
 }
