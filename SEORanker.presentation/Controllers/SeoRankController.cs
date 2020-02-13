@@ -20,9 +20,11 @@ namespace SEORanker.presentation.Controllers
 
         [HttpPost("search")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSearchContent(SeoRankSearch searchParams)
         {
             var content = await _manager.GetSearchContent(searchParams.Search);
+            if (content == null) return NotFound(new ErrorResponse(404, $"Content could not be found."));
             return Ok(content);
         }
     }
