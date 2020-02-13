@@ -7,9 +7,11 @@ Ranks.propTypes = {
 
 export function Ranks({ ranks }) {
     return (
-        <div className="row">
-            <p>{ranks.length > 0 && "Top 100 Ranks:"}</p>
-            {ranks.map((rank, i) => <div className="rank" key={i}>{rank}</div>)}
-        </div>
+        <>
+            <h4 className="ranks-title">{ranks.length > 0 && "Ranks in Top 100 (including Ads):"}</h4>
+            <div className="row">
+                {ranks.map((rank, i) => <div className="rank" key={i}>{rank}</div>)}
+            </div>
+        </>
     )
 }

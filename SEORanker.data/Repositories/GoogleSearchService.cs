@@ -24,7 +24,7 @@ namespace SEORanker.data.Repositories
 
         public async Task<string> GetSearchContent(string search)
         {
-            var url = $"{_host}/search?q={search}";
+            var url = $"{_host}/search?q={search}&num=100";
             var response = await _client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
