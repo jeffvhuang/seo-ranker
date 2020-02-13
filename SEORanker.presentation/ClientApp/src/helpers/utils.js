@@ -5,6 +5,9 @@
  */
 export function getRanks(content, url) {
     const ranks = [];
+    const urlToMatch = (url.startsWith("https://")) ? url.replace("https://", "")
+        : (url.startsWith("http://")) ? url.replace("http://", "")
+        : url;
 
     const parser = new DOMParser();
     const html = parser.parseFromString(content, "text/html");
@@ -27,7 +30,7 @@ export function getRanks(content, url) {
                 resultNumber++;
                 const allText = links[0].innerText.toLowerCase();
 
-                if (allText.includes(url.toLowerCase())) ranks.push(resultNumber);
+                if (allText.includes(urlToMatch.toLowerCase())) ranks.push(resultNumber);
             }
         }
     }
