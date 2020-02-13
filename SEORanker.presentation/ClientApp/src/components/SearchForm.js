@@ -29,9 +29,9 @@ export class SearchForm extends Component {
 
     fetchRanks = () => {
         const { search, url } = this.state;
-        const data = { search, url };
+        const data = { search };
 
-        fetch('https://localhost:44389/api/rank', {
+        fetch('https://localhost:44389/api/search', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -41,7 +41,7 @@ export class SearchForm extends Component {
         })
             .then(resp => resp.json())
             .then(json => {
-                const ranks = getRanks(json);
+                const ranks = getRanks(json, url);
                 this.props.setRanks(ranks);
                 })
             .catch((error) => {
