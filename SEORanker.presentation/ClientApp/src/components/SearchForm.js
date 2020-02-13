@@ -17,7 +17,8 @@ export class SearchForm extends Component {
             validate: {
                 searchState: 'has-success',
                 urlState: 'has-success'
-            }
+            },
+            error: ""
         }
     }
 
@@ -35,7 +36,7 @@ export class SearchForm extends Component {
         } else {
             validate.searchState = 'has-danger'
         }
-        this.setState({ validate })
+        this.setState({ validate, error: "" })
     }
 
     validateUrl = e => {
@@ -45,12 +46,12 @@ export class SearchForm extends Component {
         } else {
             validate.urlState = 'has-danger'
         }
-        this.setState({ validate })
+        this.setState({ validate, error: "" })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({ loading: true }, this.fetchRanks);
+        this.setState({ loading: true, error: "" }, this.fetchRanks);
     }
 
     fetchRanks = () => {
@@ -71,7 +72,7 @@ export class SearchForm extends Component {
                 this.props.setRanks(ranks);
                 })
             .catch((error) => {
-                console.error('Error:', error);
+                this.setState({ error: "Oops, something went wrong with the request" });
             })
             .finally(() => {
                 this.setState({ loading: false });
@@ -79,7 +80,7 @@ export class SearchForm extends Component {
     }
 
     render() {
-        const { search, url, loading, validate } = this.state;
+        const { search, url, loading, validate, error } = this.state;
 
     return (
         <Form onSubmit={this.handleSubmit}>
@@ -120,6 +121,9 @@ export class SearchForm extends Component {
                 <FormFeedback invalid>Please enter url in a correct format</FormFeedback>
             </FormGroup>
             <div className="submit-row">
+                {loading
+                    ? <p>Fetching results...</p>
+                    : (error.length > 0) ? <p className="error">{error}</p> : null}
                 <SubmitButton isLoading={loading || validate.searchState === 'has-danger' || validate.urlState === 'has-danger'} />
             </div>
         </Form>

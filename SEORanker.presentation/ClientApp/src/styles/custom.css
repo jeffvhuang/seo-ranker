@@ -29,9 +29,9 @@ code {
     margin-left: 0;
 }
 
-.row > p {
-    margin: 0 20px;
-}
+    .row > p {
+        margin: 0 20px;
+    }
 
 .rank {
     height: 30px;
@@ -45,4 +45,16 @@ code {
 .submit-row {
     display: flex;
     justify-content: flex-end;
+}
+
+    .submit-row > p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+.error {
+    color: red;
 }
