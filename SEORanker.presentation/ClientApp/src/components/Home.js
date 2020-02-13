@@ -45,7 +45,6 @@ export class Home extends Component {
   render () {
       return (
           <div>
-              <h2>SEO Ranker</h2>
               <Form onSubmit={this.handleSubmit}>
                   <FormGroup>
                       <Label for="search">Search</Label>
