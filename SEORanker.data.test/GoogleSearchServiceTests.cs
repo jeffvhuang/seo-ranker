@@ -2,7 +2,6 @@ using Microsoft.Extensions.Configuration;
 using Moq;
 using RichardSzalay.MockHttp;
 using SEORanker.data.Repositories;
-using System;
 using System.Net;
 using System.Net.Http;
 using Xunit;
@@ -12,7 +11,6 @@ namespace SEORanker.data.test
     public class GoogleSearchServiceTests
     {
         private readonly Mock<IConfiguration> _mockConfig;
-        private readonly MockHttpMessageHandler _mockHttp;
         private const string Host = "http://searchengine.com";
 
         public GoogleSearchServiceTests()
@@ -22,7 +20,6 @@ namespace SEORanker.data.test
 
             _mockConfig = new Mock<IConfiguration>();
             _mockConfig.Setup(a => a.GetSection(It.Is<string>(s => s == "Search"))).Returns(mockConfSection.Object);
-            _mockHttp = new MockHttpMessageHandler();
         }
 
         [Theory]

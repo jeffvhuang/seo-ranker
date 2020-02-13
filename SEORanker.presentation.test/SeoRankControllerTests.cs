@@ -21,14 +21,11 @@ namespace SEORanker.presentation.test
         [Fact]
         public async void GetSearchContent_ReturnsOk_WhenManagerReturnsContent()
         {
-            // Arrange
             _mockManager.Setup(x => x.GetSearchContent(It.IsAny<string>())).ReturnsAsync("any string");
 
-            // Act
             var search = new SeoRankSearch { Search = "online title search" };
             IActionResult result = await _controller.GetSearchContent(search);
 
-            // Assert
             var objectResult = Assert.IsType<OkObjectResult>(result);
             Assert.IsType<string>(objectResult.Value);
         }
@@ -37,14 +34,11 @@ namespace SEORanker.presentation.test
         [InlineData("<!DOCTYPE html><html lang=\"en-AU\" ></html>")]
         public async void GetSearchContent_ReturnsCorrectString(string content)
         {
-            // Arrange
             _mockManager.Setup(x => x.GetSearchContent(It.IsAny<string>())).ReturnsAsync(content);
 
-            // Act
             var search = new SeoRankSearch { Search = "online title search" };
             IActionResult result = await _controller.GetSearchContent(search);
 
-            // Assert
             var objectResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(objectResult.Value, content);
         }
@@ -54,7 +48,6 @@ namespace SEORanker.presentation.test
         {
             string content = null;
             _mockManager.Setup(x => x.GetSearchContent(It.IsAny<string>())).ReturnsAsync(content);
-
 
             var search = new SeoRankSearch { Search = "a very random dskahfisa search ndkosahfoaslg" };
             IActionResult result = await _controller.GetSearchContent(search);
