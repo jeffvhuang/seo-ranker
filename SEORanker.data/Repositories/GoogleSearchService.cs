@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SEORanker.data.Repositories
@@ -13,29 +10,26 @@ namespace SEORanker.data.Repositories
     {
         private readonly HttpClient _client;
         private IConfigurationSection _settings;
+        private readonly string _host;
 
         public GoogleSearchService(IConfiguration config, HttpClient client)
         {
             _client = client;
             _settings = config.GetSection("Search");
-            var host = _settings["Host"];
+            _host = _settings["Host"];
 
-            _client.BaseAddress = new Uri(host);
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client.DefaultRequestHeaders.Add("User-Agent", "SeoRanker");
         }
 
         public async Task<string> GetSearchContent(string search)
         {
-            var searchQuery = search.Replace(" ", "%20");
-            var path = $"/search?q={searchQuery}";
-            var response = await _client.GetAsync(path);
+            var url = $"{_host}/search?q={search}";
+            var response = await _client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<string>(jsonString);
-                return result;
+                return await response.Content.ReadAsStringAsync();
             }
             else if (response.StatusCode == HttpStatusCode.NotFound) return null;
             else throw new Exception(response.ReasonPhrase);
