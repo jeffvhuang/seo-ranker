@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import SubmitButton from './common/SubmitButton';
 import { getRanks } from '../helpers/utils';
+import isURL from 'validator/lib/isURL';
 
 export class SearchForm extends Component {
     static displayName = SearchForm.name;
@@ -12,7 +13,11 @@ export class SearchForm extends Component {
         this.state = {
             search: 'online title search',
             url: 'www.infotrack.com.au',
-            loading: false
+            loading: false,
+            validate: {
+                searchState: 'has-success',
+                urlState: 'has-success'
+            }
         }
     }
 
@@ -20,6 +25,27 @@ export class SearchForm extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
+    }
+
+    // return appropriate property to change based on the input
+    validateSearch = e => {
+        const { validate } = this.state
+        if (e.target.value.length > 0) {
+            validate.searchState = 'has-success' 
+        } else {
+            validate.searchState = 'has-danger'
+        }
+        this.setState({ validate })
+    }
+
+    validateUrl = e => {
+        const { validate } = this.state
+        if (isURL(e.target.value)) {
+            validate.urlState = 'has-success' 
+        } else {
+            validate.urlState = 'has-danger'
+        }
+        this.setState({ validate })
     }
 
     handleSubmit = (e) => {
@@ -52,7 +78,9 @@ export class SearchForm extends Component {
             })
     }
 
-  render() {
+    render() {
+        const { search, url, loading, validate } = this.state;
+
     return (
         <Form onSubmit={this.handleSubmit}>
             <FormGroup>
@@ -62,8 +90,16 @@ export class SearchForm extends Component {
                     name="search"
                     type="text"
                     placeholder="What do you want to search in Google"
-                    value={this.state.search}
-                    onChange={this.handleChange} />
+                    value={search}
+                    valid={validate.searchState === 'has-success'}
+                    invalid={validate.searchState === 'has-danger'}
+                    onChange={e => {
+                        this.validateSearch(e)
+                        this.handleChange(e)
+                    }}
+                />
+                <FormFeedback valid>This is what will be searched through Google</FormFeedback>
+                <FormFeedback invalid>The search cannot be empty</FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="url">Company Url</Label>
@@ -72,11 +108,19 @@ export class SearchForm extends Component {
                     name="url"
                     type="text"
                     placeholder="www.infotrack.com.au"
-                    value={this.state.url}
-                    onChange={this.handleChange} />
+                    value={url}
+                    valid={validate.urlState === 'has-success'}
+                    invalid={validate.urlState === 'has-danger'}
+                    onChange={e => {
+                        this.validateUrl(e)
+                        this.handleChange(e)
+                    }}
+                />
+                <FormFeedback valid>This will be matched to all returned results</FormFeedback>
+                <FormFeedback invalid>Please enter url in a correct format</FormFeedback>
             </FormGroup>
             <div className="submit-row">
-                <SubmitButton isLoading={this.state.loading} />
+                <SubmitButton isLoading={loading || validate.searchState === 'has-danger' || validate.urlState === 'has-danger'} />
             </div>
         </Form>
     );
