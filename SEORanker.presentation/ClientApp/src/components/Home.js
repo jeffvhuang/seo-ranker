@@ -6,16 +6,39 @@ export class Home extends Component {
 
     constructor() {
         super();
-        this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.state = {
+            search: '',
+            url: 'www.infotrack.com.au',
+            ranks: []
+        }
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        console.log(data);
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { search, url } = this.state;
+        const data = { search, url };
+
         fetch('https://localhost:44389/api/rank', {
             method: 'POST',
-            body: data,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        })
+        .then(resp => resp.json())
+        .then(json => {
+            this.setState({ ranks: json });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
         });
     }
 
@@ -26,11 +49,23 @@ export class Home extends Component {
               <Form onSubmit={this.handleSubmit}>
                   <FormGroup>
                       <Label for="search">Search</Label>
-                        <Input id="search" name="search" type="text" placeholder="What do you want to search in Google" />
+                      <Input
+                          id="search"
+                          name="search"
+                          type="text"
+                          placeholder="What do you want to search in Google"
+                          value={this.state.search}
+                          onChange={this.handleChange} />
                   </FormGroup>
                   <FormGroup>
-                      <Label for="rank-url">Company Url</Label>
-                      <Input id="rank-url" name="rank-url" type="text" placeholder="What url do you want to rank for?" />
+                      <Label for="url">Company Url</Label>
+                      <Input
+                          id="url"
+                          name="url"
+                          type="text"
+                          placeholder="www.infotrack.com.au"
+                          value={this.state.url}
+                          onChange={this.handleChange} />
                   </FormGroup>
                   <Button type="submit">Submit</Button>
               </Form>
